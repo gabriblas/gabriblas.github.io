@@ -4,7 +4,7 @@ title: VolontMusic
 # VolontMusic
 _La musica che unisce_
 
-<button name="button" onclick="https://gabriblas.github.io/test#Chi-siamo">Click me</button>
+<button name="button" onclick="https://gabriblas.github.io/test#Chi-siamo">Scopri chi siamo</button>
 
 vfdsgddg
 
