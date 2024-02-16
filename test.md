@@ -4,7 +4,7 @@ title: VolontMusic
 # VolontMusic
 _La musica che unisce_
 
-[button href="#la-serata"]
+<A href="#section-1">Section One</A>
 
 vfdsgddg
 
