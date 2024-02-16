@@ -1,6 +1,6 @@
 ---
 title: VolontMusic
-image: /bg.png
+image: bg.png
 ---
 # VolontMusic
 _La musica che unisce_
