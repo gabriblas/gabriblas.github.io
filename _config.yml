@@ -2,6 +2,7 @@
 url: "https://gabriblas.github.io" 
 
 remote_theme: raviriley/agency-jekyll-theme
+title: VolontMusic
 logo:     #optional, defaults to site title
   path: logo.png
   height: 60 #height in px, defaults to 52px
