@@ -4,7 +4,7 @@ title: VolontMusic
 # VolontMusic
 _La musica che unisce_
 
-<A href="#La-serata">Section One</A>
+<button name="button" onclick="gabriblas.github.io/test#Chi-siamo">Click me</button>
 
 vfdsgddg
 
