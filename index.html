@@ -1,14 +1,26 @@
 ---
 title: VolontMusic
 ---
-<header style="background-image: url('{{ site.baseurl }}/bg.png');">
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
   <head>
     <meta charset="utf-8">
-    <title>{{ page.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><^>{{ .Site.Title }}</title>
   </head>
   <body>
-    <h1>Hello world!</h1>
+
+    <header>
+      <h1>{{ .Site.Title }}</h1>
+    </header>
+    
+    <main>
+      <h2>{{ .Title }}</h2>
+      {{ .Content }}
+    </main>
+
+    <footer>
+      <small>Made with love and Hugo</small>
+    </footer>
   </body>
 </html>
