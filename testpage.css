@@ -1,19 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@100..900&family=Dosis:wght@200..800&display=swap');
 
-
-body, html {
-  font-family: "Dosis" !important;
-}
-
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6  {
-  font-family: "Big Shoulders Stencil Display" !important;
-  font-size: 70px;
-}
 
 
 .navbar-static-top.navbar .menu-bar > .navbar-nav > li > a {
-   font-family:  "Big Shoulders Stencil Display" !important;
+   font-family: "Big Shoulders Stencil Display" !important;
    font-size: 40px;
 }
 
