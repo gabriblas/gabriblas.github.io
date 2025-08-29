@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.parcel-cache/
+parcel-bundle-reports/
+package-lock.json
+bg

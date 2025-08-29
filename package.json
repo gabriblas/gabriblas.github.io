@@ -1,0 +1,32 @@
+{
+  "name": "volontqr",
+  "version": "0.1.0",
+  "description": "Bulk QR codes for awesome events",
+  "default": "index.html",
+  "browserslist": "> 5%, last 2 versions, not dead",
+  "scripts": {
+    "start": "parcel serve src/index.html --public-url / --dist-dir dist",
+    "build": "rm -rf ./docs && parcel build src/index.html --dist-dir docs --public-url \"https://gabriblas.github.io/\"",
+    "analyze": "parcel build src/index.html --reporter @parcel/reporter-bundle-analyzer",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriele Blasi",
+  "license": "MIT",
+  "devDependencies": {
+    "@parcel/compressor-brotli": "^2.15.4",
+    "@parcel/compressor-gzip": "^2.15.4",
+    "@parcel/reporter-bundle-analyzer": "^2.15.4",
+    "@parcel/transformer-sass": "^2.15.4",
+    "buffer": "^6.0.3",
+    "parcel": "^2.15.4",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^5.4.54",
+    "qrcode-svg": "^1.1.0"
+  }
+}

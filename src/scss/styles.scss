@@ -1,0 +1,85 @@
+@import "bootstrap/scss/bootstrap";
+$bootstrap-icons-font-dir: "../../node_modules/bootstrap-icons/font/fonts";
+@import "bootstrap-icons/font/bootstrap-icons";
+
+
+
+.card-header {
+    min-height: 3.5rem;
+    /* adjust as needed */
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.container {
+    min-height: 100vh;
+    /* full screen */
+    display: flex;
+    flex-direction: column;
+}
+
+.container>.row {
+    flex: 1;
+    /* fill remaining space */
+}
+
+/* Monospace + consistent spacing */
+.link-editor,
+.link-editor * {
+    font-family: ui-monospace, monospace;
+    line-height: 1.5;
+}
+
+.link-editor .gutter {
+    user-select: none;
+    white-space: pre;
+    min-width: 2.5rem;
+    overflow: hidden;
+}
+
+.link-editor .editor-wrapper {
+    position: relative;
+}
+
+.link-editor .highlights,
+.link-editor .editor-textarea {
+    font: inherit;
+    line-height: inherit;
+    white-space: pre;
+    tab-size: 2;
+}
+
+.link-editor .highlights {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    color: transparent;
+    pointer-events: none;
+}
+
+.link-editor .editor-textarea {
+    background: transparent;
+    resize: none;
+    border: 0;
+    padding: .5rem .5rem;
+    outline: none;
+}
+
+/* Per-line background for invalid lines */
+.link-editor .highlights .line.invalid {
+    background: rgba(220, 53, 69, .15);
+}
+
+/* Bootstrap danger @ 15% */
+.link-editor .highlights .line.valid {
+    background: transparent;
+}
+
+/* Optional: emphasize whole editor if any invalid lines exist */
+.link-editor.invalid {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 .25rem rgba(220, 53, 69, .15);
+}

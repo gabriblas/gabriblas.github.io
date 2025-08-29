@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang=en><meta charset=UTF-8><title>VolontQR</title><meta name=viewport content="width=device-width, initial-scale=1"><link rel=stylesheet href=https://gabriblas.github.io/volontqr.a475634e.css><script type=module src=https://gabriblas.github.io/volontqr.9bb4fd1e.js></script><link rel=icon href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>"><div class="container py-5">
+    <div class="align-items-center d-flex flex-wrap justify-content-between mb-4">
+        <h1 class="fw-bold mb-0">VolontQR</h1>
+        <div class="align-items-center d-flex gap-3 mt-lg-0">
+            <button id=themeToggle class="btn btn-outline-secondary btn-sm" title="Tema chiaro/scuro">
+                <i class="bi bi-moon-stars" id=themeBtn></i>
+            </button>
+            <a class="btn btn-outline-secondary btn-sm" href=https://github.com/gabriblas/volontQR target=_blank title=Github>
+                <i class="bi bi-github"></i>
+            </a>
+            <span class="badge bg-primary">v1.0.0</span>
+        </div>
+    </div>
+    <div class="g-4 row">
+        
+        <div class=col-lg-6>
+            <div class="border-0 card h-100 rounded-3 shadow-lg">
+                <div class="align-items-bottom card-header">
+                    <ul class="nav nav-fill nav-pills" id=settingsTabs role=tablist>
+                        <li class=nav-item role=presentation>
+                            <button class="active nav-link" id=upload-tab data-bs-toggle=tab data-bs-target=#uploadTab type=button role=tab>
+                                <i class="bi bi-upload me-1"></i> Sfondo e links
+                            </button>
+                        </li>
+                        <li class=nav-item role=presentation>
+                            <button class=nav-link id=qr-tab data-bs-toggle=tab data-bs-target=#qrTab type=button role=tab>
+                                <i class="bi bi-qr-code me-1"></i> Opzioni QR code
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body tab-content">
+                    
+                    <div class="active fade show tab-pane" id=uploadTab role=tabpanel>
+                        <form class="g-4 needs-validation row" novalidate>
+                            <div class=col-12>
+                                <label for=bgInput class=form-label>Sfondo (PDF, una pagina)</label>
+                                <input type=file class=form-control id=bgInput accept=application/pdf required>
+                                <div class=invalid-feedback>Caricare un file pdf valido</div>
+                            </div>
+                            <div class=col-12>
+                                <label for=links class=form-label>Links (uno per linea)</label>
+
+                                
+                                <div class="border d-flex link-editor overflow-hidden rounded" id=linksEditor style=height:220px>
+                                    
+                                    <div class="border-end gutter px-2 py-2 text-end text-muted">1</div>
+
+                                    
+                                    <div class="editor-wrapper flex-grow-1 position-relative">
+                                        <pre class="highlights m-0 px-2 py-2"></pre>
+                                        <textarea id=links class="border-0 editor-textarea form-control h-100 position-absolute start-0 top-0 w-100" placeholder=https://example.com required></textarea>
+                                    </div>
+                                </div>
+
+                                <div class=form-text>Gli URL devono iniziare con <code>http://</code> oppure
+                                    <code>https://</code>.
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    
+                    <div class="fade tab-pane" id=qrTab role=tabpanel>
+                        <div class="g-4 row">
+                            <div class=col-md-3>
+                                <label for=qrSize class=form-label>Dimensione</label>
+                                <input type=number id=qrSize class=form-control placeholder=100 min=1 step=1 required>
+                            </div>
+                            <div class=col-md-3>
+                                <label for=posX class=form-label>x</label>
+                                <input type=number id=posX class=form-control placeholder=0 required>
+                            </div>
+                            <div class=col-md-3>
+                                <label for=posY class=form-label>y</label>
+                                <input type=number id=posY class=form-control placeholder=0 required>
+                            </div>
+                            <div class=col-md-3>
+                                <label for=rotation class=form-label>Rotazione</label>
+                                <input type=number id=rotation class=form-control placeholder=0 min=0 max=360 required>
+                            </div>
+                            <div class=col-md-4>
+                                <label class=form-label>Colore primo piano</label>
+                                <div class=input-group>
+                                    <span class=input-group-text>
+                                        <input type=checkbox id=fgColorAlpha title="Mostra/nascondi primo piano" class=form-check-input checked>
+                                    </span>
+                                    <input type=color id=fgColor class="form-control form-control-color" value=#000000 title="Choose color">
+                                </div>
+                            </div>
+                            <div class=col-md-4>
+                                <label class=form-label>Colore sfondo</label>
+                                <div class=input-group>
+                                    <span class=input-group-text>
+                                        <input type=checkbox id=bgColorAlpha title="Mostra/nascondi sfondo" class=form-check-input checked>
+                                    </span>
+                                    <input type=color id=bgColor class="form-control form-control-color" value=#ffffff title="Choose color">
+                                </div>
+                            </div>
+                            <div class=col-md-4>
+                                <div class="d-flex justify-content-between">
+                                    <label class=form-label>Accuratezza</label>
+                                    <i class="bi bi-question-circle-fill" data-bs-toggle=tooltip data-bs-placement=top data-bs-title="Aumentare l'accuratezza aumenta il numero di quadrati nel QR code, ma migliora la sua capacità di essere letto in presenza di errori o imperfezioni."></i>
+                                </div>
+                                <select id=ecLevel class=form-select>
+                                    <option value=L>L (bassa)</option>
+                                    <option value=M>M (media)</option>
+                                    <option value=Q>Q (quartile)</option>
+                                    <option value=H selected>H (alta)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class=col-lg-6>
+            <div class="border-0 card h-100 rounded-3 shadow-lg">
+                <div class="align-items-center card-header d-flex justify-content-between">
+                    <h6 class=mb-0><i class="bi bi-eye me-1"></i> Anteprima</h6>
+                    <div class="align-items-center d-flex flex-grow-1 gap-2 justify-content-end">
+                        
+                        <div class="input-group input-group-sm w-50" id=downloadGroup>
+                            <input class=form-control id=fileName title="Nome del file" placeholder=tickets.pdf style=max-width:200px>
+                            <button class="btn btn-primary" id=generateBtn>
+                                <i class="bi bi-download"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="align-items-center d-none gap-2 w-50" id=progressGroup>
+                            <div class="d-flex flex-grow-1 progress" id=progressFull role=progressbar>
+                                <div class="progress-bar progress-bar-animated progress-bar-striped" id=progressDone style=width:55%>
+                                </div>
+                            </div>
+                            <button class="btn-close flex-shrink-0" id=stopBtn></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-center" id=canvasContainer hidden>
+                    <canvas id=previewCanvas class="border rounded"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
