@@ -1,203 +1,150 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <title>VolontQR</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/css/bootstrap.min.css"
-    integrity="sha512-fw7f+TcMjTb7bpbLJZlP8g2Y4XcCyFZW8uy8HsRZsH/SwbMw0plKHFHr99DN3l04VsYNwvzicUX/6qurvIxbxw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css"
-    integrity="sha512-t7Few9xlddEmgd3oKZQahkNI4dS6l80+eGEzFQiqtyVYdvcSG2D3Iub77R20BdotfRPA9caaRkg1tyaJiPmO0g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="index.css">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/js/bootstrap.bundle.min.js"
-    integrity="sha512-Tc0i+vRogmX4NN7tuLbQfBxa8JkfUSAxSFVzmU31nVdHyiHElPPy2cWfFacmCJKw0VqovrzKhdd2TSTMdAxp2g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"
-    integrity="sha512-z8IYLHO8bTgFqj+yrPyIJnzBDf7DDhWwiEsk4sY+Oe6J2M+WQequeGS7qioI5vT6rXgVRb4K1UVQC5ER7MKzKQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script type="module">
-    import * as pdfjs from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.4.54/pdf.min.mjs";
-    pdfjs.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.4.54/pdf.worker.min.mjs";
-    window.pdfjs = pdfjs;
-  </script>
-  <script src="qrcode.min.js"></script>
-</head>
-
-<div class="container py-5">
-  <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
-    <h1 class="fw-bold mb-0">VolontQR</h1>
-    <div class="d-flex align-items-center gap-3 mt-lg-0">
-      <button id="themeToggle" class="btn btn-outline-secondary btn-sm" title="Tema chiaro/scuro" onclick="toggleTheme()">
-        <i class="bi bi-moon-stars" id="themeBtn"></i>
-      </button>
-      <a class="btn btn-outline-secondary btn-sm" href="https://github.com/gabriblas/volontQR" target="_blank"
-        class="btn btn-sm" title="Github">
-        <i class="bi bi-github"></i>
-      </a>
-      <span class="badge bg-primary">v1.0.0</span>
+<!DOCTYPE html><html lang=en><meta charset=UTF-8><title>VolontQR</title><meta name=viewport content="width=device-width, initial-scale=1"><link rel=stylesheet href=https://gabriblas.github.io/volontqr.361c2b69.css><script type=module src=https://gabriblas.github.io/volontqr.53dbe235.js></script><link rel=icon href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>"><div class="container py-5">
+    <div class="align-items-center d-flex flex-wrap justify-content-between mb-4">
+        <h1 class="fw-bold mb-0">VolontQR</h1>
+        <div class="align-items-center d-flex gap-3 mt-lg-0">
+            <button id=themeToggle class="btn btn-outline-secondary btn-sm" title="Tema chiaro/scuro">
+                <i class="bi bi-moon-stars" id=themeBtn></i>
+            </button>
+            <a class="btn btn-outline-secondary btn-sm" href=https://github.com/gabriblas/volontQR target=_blank title=Github>
+                <i class="bi bi-github"></i>
+            </a>
+            <span class="badge bg-primary">v1.0.0</span>
+        </div>
     </div>
-  </div>
-  <div class="row g-4">
-    <!-- Left Card: Tabs -->
-    <div class="col-lg-6">
-      <div class="card shadow-lg border-0 rounded-3 h-100">
-        <div class="card-header align-items-bottom">
-          <ul class="nav nav-pills nav-fill" id="settingsTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="upload-tab" data-bs-toggle="tab" data-bs-target="#uploadTab"
-                type="button" role="tab">
-                <i class="bi bi-upload me-1"></i> Sfondo e links
-              </button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="qr-tab" data-bs-toggle="tab" data-bs-target="#qrTab" type="button"
-                role="tab">
-                <i class="bi bi-qr-code me-1"></i> Opzioni QR code
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div class="card-body tab-content">
-          <!-- Upload Tab -->
-          <div class="tab-pane fade show active" id="uploadTab" role="tabpanel">
-            <form class="row g-4 needs-validation" novalidate>
-              <div class="col-12">
-                <label for="bgInput" class="form-label">Sfondo (PDF, una pagina)</label>
-                <input type="file" class="form-control" id="bgInput" accept="application/pdf" required
-                  onchange="makePreview()">
-                <div class="invalid-feedback">Caricare un file pdf valido</div>
-              </div>
-              <div class="col-12">
-                <label for="links" class="form-label">Links (uno per linea)</label>
+    <div class="g-4 row">
+        
+        <div class=col-lg-6>
+            <div class="border-0 card h-100 rounded-3 shadow-lg">
+                <div class="align-items-bottom card-header">
+                    <ul class="nav nav-fill nav-pills" id=settingsTabs role=tablist>
+                        <li class=nav-item role=presentation>
+                            <button class="active nav-link" id=upload-tab data-bs-toggle=tab data-bs-target=#uploadTab type=button role=tab>
+                                <i class="bi bi-upload me-1"></i> Sfondo e links
+                            </button>
+                        </li>
+                        <li class=nav-item role=presentation>
+                            <button class=nav-link id=qr-tab data-bs-toggle=tab data-bs-target=#qrTab type=button role=tab>
+                                <i class="bi bi-qr-code me-1"></i> Opzioni QR code
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body tab-content">
+                    
+                    <div class="active fade show tab-pane" id=uploadTab role=tabpanel>
+                        <form class="g-4 needs-validation row" novalidate>
+                            <div class=col-12>
+                                <label for=bgInput class=form-label>Sfondo (PDF, una pagina)</label>
+                                <input type=file class=form-control id=bgInput accept=application/pdf required>
+                                <div class=invalid-feedback>Caricare un file pdf valido</div>
+                            </div>
+                            <div class=col-12>
+                                <label for=links class=form-label>Links (uno per linea)</label>
 
-                <!-- Editor -->
-                <div class="link-editor d-flex border rounded overflow-hidden" id="linksEditor" style="height: 220px;">
-                  <!-- Line numbers -->
-                  <div class="gutter text-muted text-end border-end px-2 py-2">1</div>
+                                
+                                <div class="border d-flex link-editor overflow-hidden rounded" id=linksEditor style=height:220px>
+                                    
+                                    <div class="border-end gutter px-2 py-2 text-end text-muted">1</div>
 
-                  <!-- Text layer (front) + highlight layer (behind) -->
-                  <div class="editor-wrapper position-relative flex-grow-1">
-                    <pre class="highlights m-0 px-2 py-2"></pre>
-                    <textarea id="links"
-                      class="form-control editor-textarea border-0 position-absolute top-0 start-0 w-100 h-100"
-                      placeholder="https://example.com" required></textarea>
-                  </div>
-                </div>
+                                    
+                                    <div class="editor-wrapper flex-grow-1 position-relative">
+                                        <pre class="highlights m-0 px-2 py-2"></pre>
+                                        <textarea id=links class="border-0 editor-textarea form-control h-100 position-absolute start-0 top-0 w-100" placeholder=https://example.com required></textarea>
+                                    </div>
+                                </div>
 
-                <div class="form-text">Gli URL devono iniziare con <code>http://</code> oppure
-                  <code>https://</code>.
-                </div>
-              </div>
-            </form>
-          </div>
+                                <div class=form-text>Gli URL devono iniziare con <code>http://</code> oppure
+                                    <code>https://</code>.
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 
-          <!-- QR Options Tab -->
-          <div class="tab-pane fade" id="qrTab" role="tabpanel">
-            <div class="row g-4">
-              <div class="col-md-3">
-                <label for="qrSize" class="form-label">Dimensione</label>
-                <input type="number" id="qrSize" class="form-control" placeholder="100" min="1" step="1" required
-                  onchange="makePreview()">
-              </div>
-              <div class="col-md-3">
-                <label for="posX" class="form-label">x</label>
-                <input type="number" id="posX" class="form-control" placeholder="0" required onchange="makePreview()">
-              </div>
-              <div class="col-md-3">
-                <label for="posY" class="form-label">y</label>
-                <input type="number" id="posY" class="form-control" placeholder="0" required onchange="makePreview()">
-              </div>
-              <div class="col-md-3">
-                <label for="rotation" class="form-label">Rotazione</label>
-                <input type="number" id="rotation" class="form-control" placeholder="0" min="0" max="360" required onchange="makePreview()">
-              </div>
-              <div class="col-md-4">
-                <label class="form-label">Colore primo piano</label>
-                <div class="input-group">
-                  <span class="input-group-text">
-                    <input type="checkbox" id="fgColorAlpha" title="Mostra/nascondi primo piano"
-                      class="form-check-input" checked onchange="makePreview()">
-                  </span>
-                  <input type="color" id="fgColor" class="form-control form-control-color" value="#000000"
-                    title="Choose color" onchange="makePreview()">
+                    
+                    <div class="fade tab-pane" id=qrTab role=tabpanel>
+                        <div class="g-4 row">
+                            <div class=col-md-3>
+                                <label for=qrSize class=form-label>Dimensione</label>
+                                <input type=number id=qrSize class=form-control placeholder=100 min=1 step=1 required>
+                            </div>
+                            <div class=col-md-3>
+                                <label for=posX class=form-label>x</label>
+                                <input type=number id=posX class=form-control placeholder=0 required>
+                            </div>
+                            <div class=col-md-3>
+                                <label for=posY class=form-label>y</label>
+                                <input type=number id=posY class=form-control placeholder=0 required>
+                            </div>
+                            <div class=col-md-3>
+                                <label for=rotation class=form-label>Rotazione</label>
+                                <input type=number id=rotation class=form-control placeholder=0 min=0 max=360 required>
+                            </div>
+                            <div class=col-md-4>
+                                <label class=form-label>Colore primo piano</label>
+                                <div class=input-group>
+                                    <span class=input-group-text>
+                                        <input type=checkbox id=fgColorAlpha title="Mostra/nascondi primo piano" class=form-check-input checked>
+                                    </span>
+                                    <input type=color id=fgColor class="form-control form-control-color" value=#000000 title="Choose color">
+                                </div>
+                            </div>
+                            <div class=col-md-4>
+                                <label class=form-label>Colore sfondo</label>
+                                <div class=input-group>
+                                    <span class=input-group-text>
+                                        <input type=checkbox id=bgColorAlpha title="Mostra/nascondi sfondo" class=form-check-input checked>
+                                    </span>
+                                    <input type=color id=bgColor class="form-control form-control-color" value=#ffffff title="Choose color">
+                                </div>
+                            </div>
+                            <div class=col-md-4>
+                                <div class="d-flex justify-content-between">
+                                    <label class=form-label>Accuratezza</label>
+                                    <i class="bi bi-question-circle-fill" data-bs-toggle=tooltip data-bs-placement=top data-bs-title="Aumentare l'accuratezza aumenta il numero di quadrati nel QR code, ma migliora la sua capacità di essere letto in presenza di errori o imperfezioni."></i>
+                                </div>
+                                <select id=ecLevel class=form-select>
+                                    <option value=L>L (bassa)</option>
+                                    <option value=M>M (media)</option>
+                                    <option value=Q>Q (quartile)</option>
+                                    <option value=H selected>H (alta)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label">Colore sfondo</label>
-                <div class="input-group">
-                  <span class="input-group-text">
-                    <input type="checkbox" id="bgColorAlpha" title="Mostra/nascondi sfondo" class="form-check-input"
-                      checked onchange="makePreview()">
-                  </span>
-                  <input type="color" id="bgColor" class="form-control form-control-color" value="#ffffff"
-                    title="Choose color" onchange="makePreview()">
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="d-flex justify-content-between">
-                  <label class="form-label">Accuratezza</label>
-                  <i class="bi bi-question-circle-fill" data-bs-toggle="tooltip" data-bs-placement="top"
-                    data-bs-title="Aumentare l'accuratezza aumenta il numero di quadrati nel QR code, ma migliora la sua capacità di essere letto in presenza di errori o imperfezioni."></i>
-                </div>
-                <select id="ecLevel" class="form-select" onchange="makePreview()">
-                  <option value="L">L (bassa)</option>
-                  <option value="M">M (media)</option>
-                  <option value="Q">Q (quartile)</option>
-                  <option value="H" selected>H (alta)</option>
-                </select>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
+
+        
+        <div class=col-lg-6>
+            <div class="border-0 card h-100 rounded-3 shadow-lg">
+                <div class="align-items-center card-header d-flex justify-content-between">
+                    <h6 class=mb-0><i class="bi bi-eye me-1"></i> Anteprima</h6>
+                    <div class="align-items-center d-flex flex-grow-1 gap-2 justify-content-end">
+                        
+                        <div class="input-group input-group-sm w-50" id=downloadGroup>
+                            <input class=form-control id=fileName title="Nome del file" placeholder=tickets.pdf style=max-width:200px>
+                            <button class="btn btn-primary" id=generateBtn>
+                                <i class="bi bi-download"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="align-items-center d-none gap-2 w-50" id=progressGroup>
+                            <div class="d-flex flex-grow-1 progress" id=progressFull role=progressbar>
+                                <div class="progress-bar progress-bar-animated progress-bar-striped" id=progressDone style=width:55%>
+                                </div>
+                            </div>
+                            <button class="btn-close flex-shrink-0" id=stopBtn></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-center" id=canvasContainer hidden>
+                    <canvas id=previewCanvas class="border rounded"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Right Card: Preview -->
-    <div class="col-lg-6">
-      <div class="card shadow-lg border-0 rounded-3 h-100">
-        <div class="card-header d-flex align-items-center justify-content-between">
-          <h6 class="mb-0"><i class="bi bi-eye me-1"></i> Anteprima</h6>
-          <div class="d-flex align-items-center gap-2 flex-grow-1 justify-content-end">
-            <!-- Download group -->
-            <div class="input-group input-group-sm w-50" id="downloadGroup">
-              <input type="text" class="form-control" id="fileName" title="Nome del file" placeholder="tickets.pdf"
-                style="max-width: 200px;">
-              <button class="btn btn-primary" id="generateBtn">
-                <i class="bi bi-download"></i>
-              </button>
-            </div>
-            <!-- Progress group -->
-            <div class="d-none align-items-center gap-2 w-50" id="progressGroup">
-              <div class="progress flex-grow-1 d-flex" id="progressFull" role="progressbar">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" id="progressDone"
-                  style="width: 55%">
-                </div>
-              </div>
-              <button class="btn-close flex-shrink-0" id="stopBtn"></button>
-            </div>
-          </div>
-        </div>
-        <div class="card-body text-center" id="canvasContainer" hidden>
-          <canvas id="previewCanvas" class="border rounded"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
-<script src="setup.js"></script>
-<script src="textEditor.js"></script>
-<script src="volontqr.js"></script>
 
-</body>
 
-</html>
